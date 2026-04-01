@@ -5,12 +5,12 @@ exports.createdata = async (req, res) => {
     try {
         let passdata = req.body
         // passdata.image = req.file.filename
-        const data = await account.create(passdata)
+            const data = await account.create(passdata)
 
-        let formattedData = {
-            ...data._doc,
-            bank_balance: data.bank_balance.toLocaleString('en-IN')
-        }
+            let formattedData = {
+                ...data._doc,
+                bank_balance: data.bank_balance.toLocaleString('en-IN')
+            }
         res.status(200).json({
             status: 'success',
             Message: 'date create successfully',
@@ -71,4 +71,4 @@ exports.updatedata = async (req, res) => {
 
         })
     }
-}
+} 

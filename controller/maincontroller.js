@@ -17,19 +17,27 @@ exports.getalldata = async (req, res) => {
                 account.countDocuments()
             ]);
 
+            // 🔹 account formatting
+            const formattedAccounts = accounts.map(acc => ({
+                ...acc._doc,
+                bank_balance: acc.bank_balance.toLocaleString('en-IN')
+            }));
+
             return res.status(200).json({
                 status: 'success',
                 page,
                 limit,
                 message: 'pagination successfully',
-                
                 totalUsers,
                 totalAccounts,
 
                 totalUserPages: Math.ceil(totalUsers / limit),
                 totalAccountPages: Math.ceil(totalAccounts / limit),
 
-                data: { users, accounts }
+                data: { 
+                    users, 
+                    accounts: formattedAccounts   // 👈 formatted data
+                }
             });
         }
 
