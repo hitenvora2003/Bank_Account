@@ -48,3 +48,27 @@ exports.deletedata = async (req, res) => {
         })
     }
 }
+exports.updatedata = async (req, res) => {
+    try {
+
+        const updateid = req.params.updateid
+        const updatedata = await account.findByIdAndUpdate(updateid,req.body,{new : true})
+        if (!updatedata) {
+            return res.status(404).json({
+                status: "fail",
+                message: "account not found"
+            });
+        }
+        res.status(200).json({
+            status: 'success',
+            Message: 'date update successfully',
+            data: updatedata
+        })
+    } catch (error) {
+        res.status(500).json({
+            status: 'failed',
+            message: error.message
+
+        })
+    }
+}
