@@ -7,7 +7,7 @@ exports.getalldata = async (req, res) => {
         const limit = parseInt(req.query.limit) || 10;
         const skip = (page - 1) * limit;
 
-        const type = req.query.type;
+        const type = req.query.type?.toLowerCase();
 
         // 🔹 CASE 1: No type → return both
         if (!type) {
